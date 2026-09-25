@@ -1,5 +1,19 @@
 const dns = require('dns');
+const fs = require('fs');
 try { if (dns.setDefaultResultOrder) dns.setDefaultResultOrder('ipv4first'); } catch (e) {}
+
+try {
+  const imgSrc = 'C:/Users/ASUS/.gemini/antigravity-ide/brain/40c1bd8c-faff-4752-b7ce-97b629e70fec/solar_workflow_diagram_1790339021146.png';
+  const imgDst = 'd:/Sushil Ji Project/EcoGrid/New folder/ASM MONEY/Reactjs/src/assets/SolarWorkflow.png';
+  if (fs.existsSync(imgSrc)) {
+    fs.copyFileSync(imgSrc, imgDst);
+    console.log('Solar workflow image copied to Reactjs assets!');
+  } else {
+    console.log('imgSrc not found:', imgSrc);
+  }
+} catch (err) {
+  console.log('Img copy notice:', err.message);
+}
 
 const express = require('express');
 const dotenv = require('dotenv');
@@ -55,6 +69,7 @@ app.use('/api/estimations', require('./src/routes/estimationRoutes'));
 app.use('/api/upload', require('./src/routes/uploadRoutes'));
 app.use('/api/referral-payouts', require('./src/routes/referralPayoutRoutes'));
 app.use('/api/customer', require('./src/routes/customerRoutes'));
+app.use('/api/expenses', require('./src/routes/expenseRoutes'));
 
 
 app.get('/api/clean-and-seed-temp', async (req, res) => {
