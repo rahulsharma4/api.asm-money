@@ -43,7 +43,7 @@ const updateAdmin = async () => {
         admin = new User({
           name: newName,
           email: newEmail,
-          phone: process.env.ADMIN_PHONE || '7470700682',
+          phone: process.env.ADMIN_PHONE || '9093610141',
           password: newPassword,
           role: 'admin',
           status: 'active',
