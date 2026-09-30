@@ -26,6 +26,16 @@ const createLead = async (req, res) => {
       assignedTo: assignedTo || req.user._id,
       createdBy: req.user._id,
       owner: req.user.role === 'admin' ? req.user._id : req.user.owner,
+      pincode: req.body.pincode,
+      city: req.body.city,
+      sanctionLoad: req.body.sanctionLoad,
+      bankLoan: req.body.bankLoan,
+      projectCost: req.body.projectCost,
+      distributionCompanyName: req.body.distributionCompanyName,
+      connectionType: req.body.connectionType,
+      proposalType: req.body.proposalType,
+      subsidy: req.body.subsidy,
+      solarRequirement: req.body.solarRequirement,
     });
 
     res.status(201).json(lead);
@@ -203,9 +213,19 @@ const updateLead = async (req, res) => {
       lead.followUpRemarks = req.body.followUpRemarks || lead.followUpRemarks;
       lead.quotationAmount = req.body.quotationAmount || lead.quotationAmount;
       lead.technicalRemarks = req.body.technicalRemarks || lead.technicalRemarks;
-      lead.companyName = req.body.companyName || lead.companyName;
-      lead.companyAddress = req.body.companyAddress || lead.companyAddress;
-      lead.gstNumber = req.body.gstNumber || lead.gstNumber;
+      lead.companyName = req.body.companyName !== undefined ? req.body.companyName : lead.companyName;
+      lead.companyAddress = req.body.companyAddress !== undefined ? req.body.companyAddress : lead.companyAddress;
+      lead.gstNumber = req.body.gstNumber !== undefined ? req.body.gstNumber : lead.gstNumber;
+      lead.pincode = req.body.pincode !== undefined ? req.body.pincode : lead.pincode;
+      lead.city = req.body.city !== undefined ? req.body.city : lead.city;
+      lead.sanctionLoad = req.body.sanctionLoad !== undefined ? req.body.sanctionLoad : lead.sanctionLoad;
+      lead.bankLoan = req.body.bankLoan !== undefined ? req.body.bankLoan : lead.bankLoan;
+      lead.projectCost = req.body.projectCost !== undefined ? req.body.projectCost : lead.projectCost;
+      lead.distributionCompanyName = req.body.distributionCompanyName !== undefined ? req.body.distributionCompanyName : lead.distributionCompanyName;
+      lead.connectionType = req.body.connectionType !== undefined ? req.body.connectionType : lead.connectionType;
+      lead.proposalType = req.body.proposalType !== undefined ? req.body.proposalType : lead.proposalType;
+      lead.subsidy = req.body.subsidy !== undefined ? req.body.subsidy : lead.subsidy;
+      lead.solarRequirement = req.body.solarRequirement !== undefined ? req.body.solarRequirement : lead.solarRequirement;
       lead.leadLostReason = req.body.leadLostReason !== undefined ? req.body.leadLostReason : lead.leadLostReason;
       
       if (req.body.subStatus !== undefined) {
