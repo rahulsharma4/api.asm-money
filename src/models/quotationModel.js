@@ -87,6 +87,16 @@ const quotationSchema = mongoose.Schema(
     battery: { type: String, default: 'No' },
     batteryRemark: { type: String, default: '' },
 
+    // Dynamic Components (Admin Managed)
+    components: [{
+      title: { type: String },
+      item: { type: String },
+      brand: { type: String },
+      specification: { type: String },
+      installationType: { type: String },
+      warrantyText: { type: String }
+    }],
+
     // Pricing (from Image 1 & 2)
     baseAmount: { type: Number, required: true }, // Rooftop System Cost
     earlyBirdDiscount: { type: Number, default: 0 },

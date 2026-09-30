@@ -70,6 +70,7 @@ app.use('/api/upload', require('./src/routes/uploadRoutes'));
 app.use('/api/referral-payouts', require('./src/routes/referralPayoutRoutes'));
 app.use('/api/customer', require('./src/routes/customerRoutes'));
 app.use('/api/expenses', require('./src/routes/expenseRoutes'));
+app.use('/api/quotation-master', require('./src/routes/quotationMasterRoutes'));
 
 
 app.get('/api/clean-and-seed-temp', async (req, res) => {

@@ -14,7 +14,8 @@ const createQuotation = async (req, res) => {
       inverterHybrid, battery, batteryRemark,
       baseAmount, earlyBirdDiscount, additionalDiscount, gstPercentage,
       centralSubsidy, stateSubsidy, terms, bankDetails, loanDetails, validUntil,
-      isGstInclusive, billingName, pricingMode, customPrices
+      isGstInclusive, billingName, pricingMode, customPrices,
+      components
     } = req.body;
 
     // Generate Quotation Number (e.g. 2026-27-0001)
@@ -102,6 +103,7 @@ const createQuotation = async (req, res) => {
       bankDetails: bankDetails || {},
       loanDetails: loanDetails || {},
       validUntil: validUntil || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      components: components || [],
       createdBy: req.user._id,
       owner: ownerId,
     });
@@ -214,7 +216,8 @@ const updateQuotation = async (req, res) => {
       inverterHybrid, battery, batteryRemark,
       baseAmount, earlyBirdDiscount, additionalDiscount, gstPercentage,
       centralSubsidy, stateSubsidy, terms, bankDetails, loanDetails, validUntil,
-      isGstInclusive, billingName, pricingMode, customPrices
+      isGstInclusive, billingName, pricingMode, customPrices,
+      components
     } = req.body;
 
     // Calculations
@@ -317,6 +320,7 @@ const updateQuotation = async (req, res) => {
     if (bankDetails) quotation.bankDetails = bankDetails;
     if (loanDetails) quotation.loanDetails = loanDetails;
     if (validUntil) quotation.validUntil = validUntil;
+    if (components !== undefined) quotation.components = components;
 
     const updatedQuotation = await quotation.save();
 
