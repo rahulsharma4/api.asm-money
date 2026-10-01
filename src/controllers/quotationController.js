@@ -1,6 +1,7 @@
 const Quotation = require('../models/quotationModel');
 const Lead = require('../models/leadModel');
 const Payment = require('../models/paymentModel');
+const Invoice = require('../models/invoiceModel');
 const { getNextSequenceValue } = require('../utils/counter');
 
 // @desc    Create a new quotation
@@ -111,6 +112,23 @@ const createQuotation = async (req, res) => {
     // Update Lead amount (preserve status)
     await Lead.findByIdAndUpdate(leadId, {
       quotationAmount: netPriceAmt
+    });
+
+    // Automatically create invoice
+    await Invoice.create({
+      lead: leadId,
+      quotation: quotation._id,
+      invoiceNo: `INV-${quotationNo}`,
+      systemSize: quotation.systemSize,
+      solarPanels: quotation.solarPanels,
+      inverter: quotation.inverter,
+      baseAmount: quotation.baseAmount,
+      gstPercentage: quotation.gstPercentage,
+      gstAmount: quotation.gstAmount,
+      isGstInclusive: quotation.isGstInclusive,
+      totalAmount: quotation.netPrice,
+      createdBy: req.user._id,
+      owner: ownerId,
     });
 
     res.status(201).json(quotation);
