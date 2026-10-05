@@ -94,7 +94,9 @@ const quotationSchema = mongoose.Schema(
       brand: { type: String },
       specification: { type: String },
       installationType: { type: String },
-      warrantyText: { type: String }
+      warrantyText: { type: String },
+      quantity: { type: String },
+      unit: { type: String }
     }],
 
     // Pricing (from Image 1 & 2)
