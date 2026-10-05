@@ -6,6 +6,7 @@ const quotationMasterSchema = new mongoose.Schema({
   brands: [{ type: String }],
   specifications: [{ type: String }],
   unit: { type: String, default: 'Nos' },
+  defaultQuantity: { type: String, default: '' },
   defaultWarrantyText: { type: String },
   order: { type: Number, default: 0 },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
